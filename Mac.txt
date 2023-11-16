@@ -1,0 +1,41 @@
+Sub Demo()
+
+Dim acrobatDocument As Acrobat.CAcroAVDoc
+
+Dim pdfDoc As Acrobat.CAcroPDDoc
+Dim wasSaved As Variant
+Dim fCount As Long
+Dim fileOpened As Boolean
+
+'Dim fileOpened As Object
+Dim acroform As Object
+Dim Fields As Object
+
+
+acrobatDocument = CreateObject("AcroExch.AVDoc")
+
+fileOpened = acrobatDocument.Open("", "")
+
+acroform = CreateObject("AFormAut.App")
+
+Fields = acroform.Fields()
+
+fCount = Fields.Count
+
+For Each field In Fields
+    row_number = row_number + 1
+    sFieldName = field.Name
+    MsgBox (field.Name + " - " + field.Value)
+Next field
+
+acrobatDocument.Close (False)
+
+'Set acrobatApplication = Nothing
+
+'field = Nothing
+acrobatDocument = Nothing
+acroform = Nothing
+Fields = Nothing
+
+
+End Sub
